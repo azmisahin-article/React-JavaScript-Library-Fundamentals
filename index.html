@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React JavaScript Library Fundamentals</title>
+</head>
+
+<body>
+
+    <!-- container for app -->
+    <div id="root"></div>
+
+    <!-- load react -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- react app -->
+    <script>
+        // it prevents the code we write from going outside the JavaScript standart rules
+        'use strict';
+
+        // this is react element
+        const e = React.createElement;
+
+        /**
+         * this is react component
+         */
+        class LikeButton extends React.Component {
+            // run when the component is created
+            constructor(props) {
+                // assigning values to the variable of its superclass ( React.Component )
+                super(props);
+                // an object to hold the state information of this component
+                this.state = { liked: false };
+            }
+
+            // render is run once
+            render() {
+                // javascript expression to check if conditions are true 
+                if (this.state.liked) {
+                    return 'You liked this.';
+                }
+
+                // html content to display when rendering the component
+                return e(
+                    // type | we create a button element
+                    'button',
+                    // props | run when the component is created like constractor
+                    { onClick: () => this.setState({ liked: true }) },
+                    // conntent or other elements
+                    'Like'
+                );
+            }
+        }
+
+        // the name of out html tag
+        const containerName = "root";
+        // it allow us to call an existing object in an html document
+        const domContainer = document.getElementById(containerName);
+        // allows you to create a root to display React components inside a browser DOM node
+        const root = ReactDOM.createRoot(domContainer);
+        // displays the react root in the DOM node
+        root.render(e(LikeButton));
+    </script>
+
+</body>
+
+</html>
